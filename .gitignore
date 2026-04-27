@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# env files (contains secrets — never commit)
+.env
+.env.local
+.env.*.local
+
+# macOS metadata
+.DS_Store
+._*
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Vercel
+.vercel
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Markdown docs generated during dev (not part of source)
+BOOKMARK_IMPLEMENTATION.md
+BOOKMARK_QUICK_START.md
+BOOKMARK_README.md
+BOOKMARK_TEST_GUIDE.md
+lib/BOOKMARK_SETUP.md
+lib/NOTION_IMAGE_SYNC.md
