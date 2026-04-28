@@ -20,7 +20,7 @@ export default function Footer() {
         <Link href="https://instagram.com" style={{ color: 'inherit' }}>IG</Link>
         <Link href="https://threads.net" style={{ color: 'inherit' }}>Threads</Link>
         <Link href="https://behance.net" style={{ color: 'inherit' }}>Behance</Link>
-        <Link href="mailto:hi@funkuki.com" style={{ color: 'inherit' }}>Mail</Link>
+        <Link href="mailto:hello@funkuki.com" style={{ color: 'inherit' }}>Mail</Link>
       </nav>
     </footer>
   )

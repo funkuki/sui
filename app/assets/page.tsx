@@ -11,7 +11,7 @@ export const revalidate = 300
 
 export default async function AssetsPage() {
   const posts = await getAssetPosts()
-  const allTags = Array.from(new Set(posts.flatMap((p) => p.tags))).sort()
+  const allCategories = Array.from(new Set(posts.map((p) => p.category).filter(Boolean))).sort()
 
   return (
     <div className="animate-page-in">
@@ -44,7 +44,7 @@ export default async function AssetsPage() {
       </section>
 
       <section style={{ padding: '30px 80px 100px' }} className="max-md:!px-5 max-md:!pb-16">
-        <PostGrid posts={posts} allTags={allTags} type="assets" />
+        <PostGrid posts={posts} allTags={allCategories} type="assets" />
       </section>
     </div>
   )

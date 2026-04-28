@@ -11,7 +11,7 @@ export const revalidate = 300
 
 export default async function WorkPage() {
   const posts = await getWorkPosts()
-  const allTags = Array.from(new Set(posts.flatMap((p) => p.tags))).sort()
+  const allTags = Array.from(new Set(posts.map((p) => p.category).filter(Boolean))).sort()
 
   return (
     <div className="animate-page-in">

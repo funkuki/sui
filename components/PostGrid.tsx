@@ -15,7 +15,7 @@ export default function PostGrid(props: PostGridProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null)
 
   const filtered = useMemo(
-    () => (activeTag ? posts.filter((p) => p.tags.includes(activeTag)) : posts),
+    () => (activeTag ? posts.filter((p) => p.category === activeTag) : posts),
     [activeTag, posts]
   )
 

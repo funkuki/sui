@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sui · Funkuki Studio</title>
+<meta name="viewport" content="width=1512" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fdfcf9; }
+  body { font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #2e2e2e; color: #fff; }
+
+  /* page enter */
+  .page-enter > * { animation: pageIn 540ms cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* gentle float */
+  .float-soft { animation: floatY 6s ease-in-out infinite; }
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* nicer focus rings */
+  input:focus, textarea:focus { border-color: #2e2e2e !important; box-shadow: 0 0 0 4px rgba(46,46,46,0.08) !important; }
+
+  /* link reset */
+  a { text-decoration: none; }
+  a:hover { color: #000 !important; }
+
+  /* full-viewport scroll snap on home */
+  [data-scroller][data-snap="true"] { scroll-snap-type: y mandatory; }
+  [data-scroller][data-snap="true"] > main > section { scroll-snap-align: start; scroll-snap-stop: always; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="details.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>

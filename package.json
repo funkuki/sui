@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync:covers": "tsx scripts/sync-notion-covers.ts"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
@@ -15,17 +16,20 @@
     "notion-to-md": "^3.1.1",
     "open-graph-scraper": "^6.11.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "resend": "^6.12.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
+    "dotenv": "^16.6.1",
     "eslint": "^8",
     "eslint-config-next": "^15.3.9",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

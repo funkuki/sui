@@ -177,7 +177,7 @@ function Byline({ date }: { date: string }) {
         width: 56,
         height: 56,
         borderRadius: '50%',
-        background: 'url(/sui/assets/little-sui.png) center/cover, #fdfcf9',
+        background: 'url(/assets/little-sui.png) center/cover, #fdfcf9',
         border: '1px solid #e6e6e6',
         flexShrink: 0,
       }} />
@@ -204,7 +204,7 @@ function AuthorCard() {
         width: 130,
         height: 130,
         borderRadius: '50%',
-        background: 'url(/sui/assets/little-sui.png) center/cover, #fdfcf9',
+        background: 'url(/assets/little-sui.png) center/cover, #fdfcf9',
         border: '1px solid #e6e6e6',
         flexShrink: 0,
       }} />

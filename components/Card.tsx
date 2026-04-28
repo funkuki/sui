@@ -162,56 +162,64 @@ function BlogCard({ post, href }: { post: BlogPost; href: string }) {
         )}
       </div>
 
-      {/* Tags + date */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 18, flexWrap: 'wrap', alignItems: 'center' }}>
-        {post.tags.slice(0, 3).map((t) => (
-          <span
-            key={t}
-            style={{
-              background: '#f1eeea',
-              borderRadius: 999,
-              padding: '4px 12px',
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 14,
-              color: '#2e2e2e',
-            }}
-          >
-            {t}
-          </span>
-        ))}
+      {/* Tags */}
+      {post.tags.length > 0 && (
+        <div style={{ display: 'flex', gap: 8, marginTop: 18, flexWrap: 'wrap' }}>
+          {post.tags.slice(0, 3).map((t) => (
+            <span
+              key={t}
+              style={{
+                background: '#f1eeea',
+                borderRadius: 999,
+                padding: '4px 12px',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 14,
+                color: '#2e2e2e',
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Title + date */}
+      <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start', marginTop: 12 }} className="max-md:!flex-col max-md:!gap-2">
+        <h3
+          style={{
+            flex: 1,
+            margin: 0,
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 700,
+            fontSize: 28,
+            lineHeight: 1.45,
+            color: '#0c0c0c',
+          }}
+          className="max-md:!text-2xl"
+        >
+          {post.title}
+        </h3>
         {dateStr && (
           <span
             style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: 14,
               color: '#8f8a8a',
-              marginLeft: 'auto',
+              flexShrink: 0,
+              paddingTop: 4,
             }}
+            className="max-md:!pt-0"
           >
             {dateStr}
           </span>
         )}
       </div>
-
-      <h3
-        style={{
-          marginTop: 12,
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 700,
-          fontSize: 28,
-          lineHeight: 1.45,
-          color: '#0c0c0c',
-        }}
-        className="max-md:!text-xl"
-      >
-        {post.title}
-      </h3>
     </Link>
   )
 }
 
 function AssetCard({ post, href }: { post: AssetPost; href: string }) {
-  const tag = post.tags[0] ?? post.category ?? ''
+  const tag = post.category
   const priceLabel = post.price === 0 ? 'Free' : `NT$${post.price.toLocaleString()}`
 
   return (

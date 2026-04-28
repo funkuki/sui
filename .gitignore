@@ -32,3 +32,9 @@ BOOKMARK_README.md
 BOOKMARK_TEST_GUIDE.md
 lib/BOOKMARK_SETUP.md
 lib/NOTION_IMAGE_SYNC.md
+
+# Claude Code project settings (may contain API keys)
+.claude/
+
+# User uploads (temp files, not source)
+uploads/

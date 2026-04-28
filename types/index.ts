@@ -37,6 +37,7 @@ export type AssetPost = {
   tags: string[]
   category: string
   summary: string
+  description: string
   price: number
   fileUrl: string
   previewUrls: string[]

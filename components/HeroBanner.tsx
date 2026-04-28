@@ -1,26 +1,32 @@
-import Image from 'next/image'
-import heroBanner from '@/public/assets/Hero-banner01.png'
-
 export default function HeroBanner() {
   return (
     <section
+      className="hero-section"
       style={{
         position: 'relative',
         marginTop: 'calc(-1 * var(--header-h))',
-        height: '100vh',
         minHeight: 520,
         overflow: 'hidden',
         display: 'flex',
       }}
     >
-      {/* Banner image */}
-      <Image
-        src={heroBanner}
-        alt=""
-        fill
-        priority
-        style={{ objectFit: 'cover', objectPosition: 'center' }}
-      />
+      {/* Banner video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="hero-video"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
+      >
+        <source src="/assets/hero-banner.mp4" type="video/mp4" />
+      </video>
       {/* Gradient overlay */}
       <div
         style={{
@@ -35,7 +41,7 @@ export default function HeroBanner() {
         style={{
           position: 'absolute',
           left: '50%',
-          bottom: 36,
+          bottom: 'max(36px, calc(env(safe-area-inset-bottom, 0px) + 20px))',
           transform: 'translateX(-50%)',
           display: 'flex',
           flexDirection: 'column',

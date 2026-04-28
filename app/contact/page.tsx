@@ -2,10 +2,16 @@
 
 import { useState } from 'react'
 
-const TOPICS = ['Brand', 'Product', 'IP / Visual', 'Vibe Coding', 'Other']
+const SUBJECTS = [
+  '一般諮詢 (General Inquiry)',
+  '合作提案 (Collaboration)',
+  '媒體/採訪 (Media)',
+  '技術/設計交流 (Networking)',
+  '其他 (Other)',
+]
 
 const INFO_ROWS = [
-  ['Email', 'hi@funkuki.com'],
+  ['Email', 'hello@funkuki.com'],
   ['Studio', 'Funkuki · Taipei'],
   ['Hours', 'Mon–Fri  10:00–19:00'],
 ]
@@ -24,8 +30,10 @@ const inputStyle: React.CSSProperties = {
 }
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', email: '', topic: 'Brand', budget: '', msg: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: SUBJECTS[0], msg: '' })
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const update = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
   const valid = form.name && form.email && form.msg
@@ -65,7 +73,7 @@ export default function ContactPage() {
               className="max-md:!text-base"
             >
               告訴我一點點背景就好 — 我通常 24 小時內回信。或寄信到{' '}
-              <strong>hi@funkuki.com</strong>。
+              <strong>hello@funkuki.com</strong>。
             </p>
 
             <div style={{ marginTop: 40, display: 'grid', gap: 0 }}>
@@ -90,7 +98,25 @@ export default function ContactPage() {
 
           {/* Right: form */}
           <form
-            onSubmit={(e) => { e.preventDefault(); if (valid) setSent(true) }}
+            onSubmit={async (e) => {
+            e.preventDefault()
+            if (!valid || loading) return
+            setLoading(true)
+            setError('')
+            try {
+              const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.msg }),
+              })
+              if (!res.ok) throw new Error('Failed')
+              setSent(true)
+            } catch {
+              setError('送出失敗，請稍後再試或直接寄信到 hello@funkuki.com')
+            } finally {
+              setLoading(false)
+            }
+          }}
             style={{
               border: '1px solid #e6e6e6',
               borderRadius: 24,
@@ -112,7 +138,7 @@ export default function ContactPage() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => { setSent(false); setForm({ name: '', email: '', topic: 'Brand', budget: '', msg: '' }) }}
+                  onClick={() => { setSent(false); setForm({ name: '', email: '', subject: SUBJECTS[0], msg: '' }) }}
                   style={{
                     marginTop: 22,
                     border: '1px solid #000',
@@ -130,7 +156,7 @@ export default function ContactPage() {
               </div>
             ) : (
               <>
-                <Field label="Your name">
+                <Field label="稱呼 / 姓名 (Name)">
                   <input
                     value={form.name}
                     onChange={(e) => update('name', e.target.value)}
@@ -139,7 +165,7 @@ export default function ContactPage() {
                     placeholder="Mei-ling Wang"
                   />
                 </Field>
-                <Field label="Email">
+                <Field label="電子郵件 (Email)">
                   <input
                     type="email"
                     value={form.email}
@@ -149,53 +175,34 @@ export default function ContactPage() {
                     placeholder="you@example.com"
                   />
                 </Field>
-                <Field label="Project type">
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {TOPICS.map((t) => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => update('topic', t)}
-                        style={{
-                          appearance: 'none',
-                          border: `1px solid ${form.topic === t ? '#000' : '#e6e6e6'}`,
-                          background: form.topic === t ? '#2e2e2e' : '#fff',
-                          color: form.topic === t ? '#fff' : '#0c0c0c',
-                          borderRadius: 999,
-                          padding: '8px 16px',
-                          fontFamily: 'Inter, sans-serif',
-                          fontSize: 16,
-                          cursor: 'pointer',
-                          transition: 'all 200ms',
-                        }}
-                      >
-                        {t}
-                      </button>
+                <Field label="聯絡主旨 (Subject)">
+                  <select
+                    value={form.subject}
+                    onChange={(e) => update('subject', e.target.value)}
+                    style={{ ...inputStyle, cursor: 'pointer', appearance: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238f8a8a' d='M6 8L0 0h12z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
+                  >
+                    {SUBJECTS.map((s) => (
+                      <option key={s} value={s}>{s}</option>
                     ))}
-                  </div>
+                  </select>
                 </Field>
-                <Field label="Budget (optional)">
-                  <input
-                    value={form.budget}
-                    onChange={(e) => update('budget', e.target.value)}
-                    style={inputStyle}
-                    placeholder="USD 5,000 – 20,000"
-                  />
-                </Field>
-                <Field label="Tell me a bit">
+                <Field label="訊息內容 (Message)">
                   <textarea
                     value={form.msg}
                     onChange={(e) => update('msg', e.target.value)}
                     required
                     rows={5}
                     style={{ ...inputStyle, resize: 'vertical' }}
-                    placeholder="What are you trying to build, and when?"
+                    placeholder="想聊些什麼嗎？"
                   />
                 </Field>
+                {error && (
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#c0392b', margin: 0 }}>{error}</p>
+                )}
                 <div style={{ marginTop: 6 }}>
                   <button
                     type="submit"
-                    disabled={!valid}
+                    disabled={!valid || loading}
                     style={{
                       appearance: 'none',
                       border: '1px solid #000',
@@ -203,14 +210,14 @@ export default function ContactPage() {
                       padding: '16px 30px',
                       fontSize: 22,
                       fontFamily: 'Inter, sans-serif',
-                      background: valid ? '#2e2e2e' : '#bbb',
+                      background: valid && !loading ? '#2e2e2e' : '#bbb',
                       color: '#fff',
-                      cursor: valid ? 'pointer' : 'not-allowed',
+                      cursor: valid && !loading ? 'pointer' : 'not-allowed',
                       width: '100%',
                       transition: 'background 200ms',
                     }}
                   >
-                    Send message →
+                    {loading ? 'Sending…' : 'Send message →'}
                   </button>
                 </div>
               </>

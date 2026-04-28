@@ -32,8 +32,8 @@ export default async function AssetDetailPage({ params }: Props) {
 
   const blocks = await getPageBlocks(post.id)
   const isFree = post.price === 0
-  const tag = post.tags[0] ?? post.category ?? ''
-  const priceLabel = isFree ? 'Free' : `NT$${post.price.toLocaleString()}`
+  const tag = post.category
+  const priceLabel = isFree ? '$0' : `NT$${post.price.toLocaleString()}`
 
   return (
     <article className="animate-page-in">
@@ -117,21 +117,21 @@ export default async function AssetDetailPage({ params }: Props) {
             top: 110,
             border: '1px solid #e6e6e6',
             borderRadius: 20,
-            padding: 30,
+            padding: '32px 28px',
             background: '#fff',
           }}>
             <div style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: 14,
+              fontSize: 13,
               color: '#8f8a8a',
               textTransform: 'uppercase',
-              letterSpacing: '0.08em',
+              letterSpacing: '0.1em',
             }}>
               {post.category || 'Asset'}
             </div>
 
             <div style={{
-              marginTop: 14,
+              marginTop: 12,
               fontFamily: 'Inter, sans-serif',
               fontSize: 44,
               fontWeight: 800,
@@ -148,9 +148,9 @@ export default async function AssetDetailPage({ params }: Props) {
 
             {post.downloads > 0 && (
               <div style={{
-                marginTop: 4,
+                marginTop: 6,
                 fontFamily: 'Inter, sans-serif',
-                fontSize: 14,
+                fontSize: 13,
                 color: '#8f8a8a',
               }}>
                 {post.downloads.toLocaleString()} downloads
@@ -159,7 +159,7 @@ export default async function AssetDetailPage({ params }: Props) {
 
             {/* Features list */}
             {post.tags.length > 0 && (
-              <ul style={{ margin: '26px 0 24px', padding: 0, listStyle: 'none', display: 'grid', gap: 10 }}>
+              <ul style={{ margin: '24px 0 0', padding: 0, listStyle: 'none', display: 'grid', gap: 10 }}>
                 {post.tags.map((t) => (
                   <li key={t} style={{
                     display: 'flex',
@@ -184,13 +184,15 @@ export default async function AssetDetailPage({ params }: Props) {
                 style={{
                   display: 'block',
                   width: '100%',
+                  marginTop: 28,
                   appearance: 'none',
                   border: '1px solid #000',
                   borderRadius: 999,
                   padding: '16px 22px',
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: 20,
-                  background: '#2e2e2e',
+                  fontSize: 18,
+                  fontWeight: 600,
+                  background: '#1a1a1a',
                   color: '#fff',
                   cursor: 'pointer',
                   textAlign: 'center',
@@ -204,11 +206,12 @@ export default async function AssetDetailPage({ params }: Props) {
               </a>
             ) : (
               <div style={{
+                marginTop: 28,
                 padding: '16px 22px',
                 borderRadius: 999,
                 background: '#e6e6e6',
                 fontFamily: 'Inter, sans-serif',
-                fontSize: 20,
+                fontSize: 18,
                 color: '#8f8a8a',
                 textAlign: 'center',
               }}>
@@ -216,19 +219,17 @@ export default async function AssetDetailPage({ params }: Props) {
               </div>
             )}
 
-            <div style={{
-              marginTop: 22,
-              paddingTop: 18,
-              borderTop: '1px solid #e6e6e6',
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 13,
-              color: '#8f8a8a',
-              lineHeight: 1.7,
-            }}>
-              {isFree
-                ? '免費下載，無需登入。歡迎分享與使用。'
-                : '付款後將收到下載連結。如有問題請聯絡 hi@funkuki.com。'}
-            </div>
+            {post.description && (
+              <div style={{
+                marginTop: 14,
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 13,
+                color: '#8f8a8a',
+                lineHeight: 1.75,
+              }}>
+                {post.description}
+              </div>
+            )}
           </aside>
         </div>
       </section>

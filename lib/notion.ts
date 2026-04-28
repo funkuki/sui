@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client'
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import type { WorkPost, BlogPost, AssetPost } from '@/types'
+import { getPublicUrl } from './supabase'
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
@@ -46,6 +47,7 @@ function url(page: PageObjectResponse, key: string): string {
   return prop.url ?? ''
 }
 
+
 function checkbox(page: PageObjectResponse, key: string): boolean {
   const prop = page.properties[key]
   if (prop?.type !== 'checkbox') return false
@@ -58,17 +60,19 @@ function number(page: PageObjectResponse, key: string): number {
   return prop.number ?? 0
 }
 
+
 // ─── Work ───────────────────────────────────────────────────────────────────
 
 function toWorkPost(page: PageObjectResponse): WorkPost {
+  const slug = text(page, 'Slug')
   return {
     id: page.id,
     title: title(page, 'Title'),
-    slug: text(page, 'Slug'),
+    slug,
     status: select(page, 'Status') as WorkPost['status'],
     publishedAt: date(page, 'Published At'),
-    coverUrl: url(page, 'Cover URL'),
-    iconUrl: url(page, 'icon'),
+    coverUrl: getPublicUrl('work', `covers/${slug}`),
+    iconUrl: getPublicUrl('work', `icons/${slug}`),
     tags: multiSelect(page, 'Tags'),
     category: select(page, 'Category'),
     summary: text(page, 'Summary'),
@@ -97,13 +101,14 @@ export async function getWorkPost(slug: string): Promise<WorkPost | null> {
 // ─── Blog ───────────────────────────────────────────────────────────────────
 
 function toBlogPost(page: PageObjectResponse): BlogPost {
+  const slug = text(page, 'Slug')
   return {
     id: page.id,
     title: title(page, 'Title'),
-    slug: text(page, 'Slug'),
+    slug,
     status: select(page, 'Status') as BlogPost['status'],
     publishedAt: date(page, 'Published At'),
-    coverUrl: url(page, 'Cover URL'),
+    coverUrl: getPublicUrl('blog', `covers/${slug}`),
     tags: multiSelect(page, 'Tags'),
     category: select(page, 'Category'),
     summary: text(page, 'Summary'),
@@ -145,16 +150,18 @@ function toAssetPost(page: PageObjectResponse): AssetPost {
   } catch {
     // malformed or empty — leave as []
   }
+  const slug = text(page, 'Slug')
   return {
     id: page.id,
     title: title(page, 'Title'),
-    slug: text(page, 'Slug'),
+    slug,
     status: select(page, 'Status') as AssetPost['status'],
     publishedAt: date(page, 'Published At'),
-    coverUrl: url(page, 'Cover URL'),
+    coverUrl: getPublicUrl('assets', `covers/${slug}`),
     tags: multiSelect(page, 'Tags'),
     category: select(page, 'Category'),
     summary: text(page, 'Summary'),
+    description: text(page, 'Description'),
     price: number(page, 'Price'),
     fileUrl: url(page, 'File URL'),
     previewUrls,

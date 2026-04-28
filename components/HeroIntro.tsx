@@ -28,7 +28,7 @@ export default function HeroIntro() {
       >
         {/* Avatar */}
         <div style={{ position: 'relative' }}>
-          <div className="animate-float" style={{ position: 'relative' }}>
+          <div style={{ position: 'relative' }}>
             <Image
               src={littleSui}
               alt="Sui"
@@ -103,6 +103,32 @@ export default function HeroIntro() {
 
           <DarkPill href="/about">More about me →</DarkPill>
         </div>
+      </div>
+
+      {/* Scroll cue */}
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          bottom: 'max(36px, calc(env(safe-area-inset-bottom, 0px) + 20px))',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 8,
+          fontFamily: 'Inter, sans-serif',
+          fontSize: 14,
+          color: '#2e2e2e',
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          opacity: 0.85,
+        }}
+      >
+        <span>scroll</span>
+        <span
+          className="animate-float-line"
+          style={{ width: 1, height: 28, background: '#2e2e2e', display: 'block' }}
+        />
       </div>
     </section>
   )

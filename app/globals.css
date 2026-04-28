@@ -8,7 +8,31 @@
   --ink2: #2e2e2e;
   --border: #e6e6e6;
   --muted: #8f8a8a;
-  --header-h: 99px;
+  --header-h: 99px; /* desktop: py-22*2 + logo-55 */
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-h: 87px; /* mobile: py-16*2 + logo-55 */
+  }
+}
+
+/* Hero viewport height — 100dvh tracks mobile browser chrome dynamically */
+.hero-section {
+  height: 100vh; /* fallback for older browsers */
+  height: 100dvh;
+}
+
+/* Hero video focus point */
+.hero-video {
+  object-position: center center;
+}
+
+/* Portrait mobile: girl is at ~57% horizontally, shift focus right */
+@media (max-width: 767px) and (orientation: portrait) {
+  .hero-video {
+    object-position: 57% center;
+  }
 }
 
 *, *::before, *::after {
