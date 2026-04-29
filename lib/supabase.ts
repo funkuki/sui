@@ -29,12 +29,7 @@ const BUCKETS = {
 export type Bucket = keyof typeof BUCKETS
 
 export function getPublicUrl(bucket: Bucket, path: string): string {
-  try {
-    const client = tryGetClient()
-    if (!client) return ''
-    const { data } = client.storage.from(BUCKETS[bucket]).getPublicUrl(path)
-    return data.publicUrl
-  } catch {
-    return ''
-  }
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  if (!url) return ''
+  return `${url}/storage/v1/object/public/${BUCKETS[bucket]}/${path}`
 }
