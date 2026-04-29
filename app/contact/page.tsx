@@ -1,6 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const SUBJECTS = [
   '一般諮詢 (General Inquiry)',
@@ -34,9 +37,12 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const update = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
-  const valid = form.name && form.email && form.msg
+  const emailValid = EMAIL_RE.test(form.email)
+  const valid = form.name && form.email && emailValid && form.msg && recaptchaToken
 
   return (
     <div className="animate-page-in">
@@ -107,12 +113,14 @@ export default function ContactPage() {
               const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.msg }),
+                body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.msg, recaptchaToken }),
               })
               if (!res.ok) throw new Error('Failed')
               setSent(true)
             } catch {
               setError('送出失敗，請稍後再試或直接寄信到 hello@funkuki.com')
+              recaptchaRef.current?.reset()
+              setRecaptchaToken(null)
             } finally {
               setLoading(false)
             }
@@ -171,9 +179,17 @@ export default function ContactPage() {
                     value={form.email}
                     onChange={(e) => update('email', e.target.value)}
                     required
-                    style={inputStyle}
+                    style={{
+                      ...inputStyle,
+                      borderColor: form.email && !emailValid ? '#c0392b' : undefined,
+                    }}
                     placeholder="you@example.com"
                   />
+                  {form.email && !emailValid && (
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: '#c0392b', margin: '4px 0 0' }}>
+                      請輸入有效的電子郵件格式
+                    </p>
+                  )}
                 </Field>
                 <Field label="聯絡主旨 (Subject)">
                   <select
@@ -196,6 +212,12 @@ export default function ContactPage() {
                     placeholder="想聊些什麼嗎？"
                   />
                 </Field>
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                  onChange={(token) => setRecaptchaToken(token)}
+                  onExpired={() => setRecaptchaToken(null)}
+                />
                 {error && (
                   <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#c0392b', margin: 0 }}>{error}</p>
                 )}

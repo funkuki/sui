@@ -12,11 +12,13 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "@supabase/supabase-js": "^2.45.0",
+    "@types/react-google-recaptcha": "^2.1.9",
     "next": "^15.3.9",
     "notion-to-md": "^3.1.1",
     "open-graph-scraper": "^6.11.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-google-recaptcha": "^3.1.0",
     "resend": "^6.12.2"
   },
   "devDependencies": {

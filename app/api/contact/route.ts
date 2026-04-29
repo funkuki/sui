@@ -1,16 +1,27 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { sendLineMessage } from '@/lib/line'
+import { verifyRecaptcha } from '@/lib/recaptcha'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(req: Request) {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   )
-  const { name, email, subject, message } = await req.json()
+  const { name, email, subject, message, recaptchaToken } = await req.json()
 
   if (!name || !email || !subject || !message) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+  }
+
+  if (!EMAIL_RE.test(email)) {
+    return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
+  }
+
+  if (!recaptchaToken || !(await verifyRecaptcha(recaptchaToken))) {
+    return NextResponse.json({ error: 'reCAPTCHA verification failed' }, { status: 400 })
   }
 
   const { error: dbError } = await supabase
