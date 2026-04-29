@@ -22,8 +22,8 @@ export async function GET(request: NextRequest) {
 
     const metadata = {
       url,
-      title: result.ogTitle || result.title || '',
-      description: result.ogDescription || result.description || '',
+      title: result.ogTitle || result.dcTitle || '',
+      description: result.ogDescription || result.dcDescription || '',
       favicon:
         result.favicon ||
         result.appleTouchIconUrl ||
