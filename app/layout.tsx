@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   },
   description: 'Designer & creator — Funkuki Studio',
   metadataBase: new URL('https://funkuki.com/sui'),
+  icons: {
+    icon: '/assets/sui-favicon.png',
+  },
   openGraph: {
     siteName: 'Sui · Funkuki Studio',
     locale: 'zh_TW',

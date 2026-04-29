@@ -26,7 +26,6 @@ export async function GET(request: NextRequest) {
       description: result.ogDescription || result.dcDescription || '',
       favicon:
         result.favicon ||
-        result.appleTouchIconUrl ||
         `https://www.google.com/s2/favicons?sz=64&domain=${new URL(url).hostname}`,
       image: result.ogImage?.[0]?.url || result.twitterImage?.[0]?.url || '',
     }
