@@ -37,7 +37,7 @@ export async function getImageBlocks(pageId: string): Promise<ImageBlockData[]> 
   const imageBlocks: ImageBlockData[] = []
 
   for (const block of response.results) {
-    if (block.type === 'image') {
+    if ('type' in block && block.type === 'image') {
       const imageBlock = block as any
       const imageData = imageBlock.image
 

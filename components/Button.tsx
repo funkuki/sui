@@ -7,6 +7,7 @@ type ButtonOwnProps<T extends ElementType> = {
   as?: T
   variant?: Variant
   size?: Size
+  className?: string
   children: React.ReactNode
 }
 
