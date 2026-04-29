@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { getWorkPosts, getWorkPost, getPageBlocks, getBlogPosts } from '@/lib/notion'
+import { getWorkPosts, getWorkPost, getPageBlocks } from '@/lib/notion'
 import NotionBlocks from '@/components/NotionBlocks'
 import BackBar from '@/components/BackBar'
 import CTASection from '@/components/CTASection'
-import type { BlogPost, WorkPost } from '@/types'
+import Card from '@/components/Card'
+import type { WorkPost } from '@/types'
 
 export const revalidate = 300
 
@@ -29,21 +29,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function WorkDetailPage({ params }: Props) {
   const { slug } = await params
-  const [post, allBlog] = await Promise.all([
-    getWorkPost(slug),
-    getBlogPosts(),
-  ])
+  const [post, allWork] = await Promise.all([getWorkPost(slug), getWorkPosts()])
   if (!post) notFound()
 
   const blocks = await getPageBlocks(post.id)
-  const relatedPosts = allBlog.slice(0, 3)
+  const relatedWork = allWork
+    .filter((p) => p.slug !== post.slug && p.category === post.category)
+    .slice(0, 3)
 
-  const metaRows = [
-    post.client && ['Client', post.client],
-    post.year > 0 && ['Year', String(post.year)],
-    post.category && ['Category', post.category],
-    post.tags.length > 0 && ['Tags', post.tags.join(' · ')],
-  ].filter(Boolean) as [string, string][]
+  const metaCols: [string, string][] = [
+    ['Client', post.client],
+    ['Role', post.role],
+    ['Timeline', post.timeline > 0 ? String(post.timeline) : ''],
+    ['Category', post.category],
+  ]
 
   return (
     <article className="animate-page-in">
@@ -98,43 +97,41 @@ export default async function WorkDetailPage({ params }: Props) {
       </section>
 
       {/* Project meta strip */}
-      {metaRows.length > 0 && (
-        <section style={{ padding: '20px 80px 40px' }} className="max-md:!px-5">
-          <div style={{
-            maxWidth: 1100,
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: `repeat(${metaRows.length}, 1fr)`,
-            gap: 24,
-            padding: '30px 0',
-            borderTop: '1px solid #e6e6e6',
-            borderBottom: '1px solid #e6e6e6',
-          }} className="max-md:!grid-cols-2">
-            {metaRows.map(([k, v]) => (
-              <div key={k}>
-                <div style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 13,
-                  color: '#8f8a8a',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  marginBottom: 8,
-                }}>
-                  {k}
-                </div>
-                <div style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 18,
-                  color: '#0c0c0c',
-                  fontWeight: 500,
-                }}>
-                  {v}
-                </div>
+      <section style={{ padding: '20px 80px 40px' }} className="max-md:!px-5">
+        <div style={{
+          maxWidth: 1100,
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: 24,
+          padding: '30px 0',
+          borderTop: '1px solid #e6e6e6',
+          borderBottom: '1px solid #e6e6e6',
+        }} className="max-md:!grid-cols-2">
+          {metaCols.map(([k, v]) => (
+            <div key={k}>
+              <div style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 13,
+                color: '#8f8a8a',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                marginBottom: 8,
+              }}>
+                {k}
               </div>
-            ))}
-          </div>
-        </section>
-      )}
+              <div style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 18,
+                color: '#0c0c0c',
+                fontWeight: 500,
+              }}>
+                {v || '—'}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Summary */}
       {post.summary && (
@@ -159,24 +156,28 @@ export default async function WorkDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* Related blog posts */}
-      {relatedPosts.length > 0 && (
+      {/* Related work */}
+      {relatedWork.length > 0 && (
         <section style={{ padding: '60px 80px 80px' }} className="max-md:!px-5">
-          <div style={{ maxWidth: 1033, margin: '0 auto' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'Inter, sans-serif',
               fontWeight: 800,
               fontSize: 36,
-              margin: '0 0 0',
-              borderTop: '1px solid #e6e6e6',
+              margin: '0 0 36px',
               paddingTop: 36,
+              borderTop: '1px solid #e6e6e6',
               color: '#0c0c0c',
             }}>
-              相關文章
+              你可能也會喜歡
             </h2>
-            <div style={{ display: 'grid', gap: 4, marginTop: 24 }}>
-              {relatedPosts.map((p) => (
-                <RelatedPostRow key={p.id} post={p} />
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: 24,
+            }} className="max-md:!grid-cols-1">
+              {relatedWork.map((p) => (
+                <Card key={p.id} type="work" post={p} />
               ))}
             </div>
           </div>
@@ -188,34 +189,3 @@ export default async function WorkDetailPage({ params }: Props) {
   )
 }
 
-function RelatedPostRow({ post }: { post: BlogPost }) {
-  return (
-    <Link
-      href={`/blog/${post.slug}`}
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '22px 4px',
-        borderBottom: '1px solid #e6e6e6',
-        fontFamily: 'Inter, sans-serif',
-        fontSize: 22,
-        color: '#0c0c0c',
-        textAlign: 'left',
-        textDecoration: 'none',
-        transition: 'transform 280ms cubic-bezier(.2,.8,.2,1)',
-      }}
-      className="hover:translate-x-2 group"
-    >
-      <span>{post.title}</span>
-      <span style={{
-        color: '#8f8a8a',
-        transition: 'color 200ms',
-        flexShrink: 0,
-        marginLeft: 16,
-      }} className="group-hover:!text-[#0c0c0c]">
-        ↗
-      </span>
-    </Link>
-  )
-}

@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/sui",
+      "destination": "/"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/sui",
+      "permanent": false
+    }
+  ]
+}

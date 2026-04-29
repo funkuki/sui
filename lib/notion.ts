@@ -77,6 +77,8 @@ function toWorkPost(page: PageObjectResponse): WorkPost {
     category: select(page, 'Category'),
     summary: text(page, 'Summary'),
     client: text(page, 'Client'),
+    role: text(page, 'Role'),
+    timeline: number(page, 'Timeline'),
     year: number(page, 'Year'),
     featured: checkbox(page, 'Featured'),
   }

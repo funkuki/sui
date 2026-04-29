@@ -10,6 +10,8 @@ export type WorkPost = {
   category: string
   summary: string
   client: string
+  role: string
+  timeline: number
   year: number
   featured: boolean
 }
