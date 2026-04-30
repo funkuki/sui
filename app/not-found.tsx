@@ -12,7 +12,7 @@ export default function NotFound() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover object-[center_60%] md:object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         >
           <source src="/assets/hero-404.webm" type="video/webm" />
           <source src="/assets/hero-404.mp4" type="video/mp4" />
