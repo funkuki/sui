@@ -199,8 +199,12 @@ export async function getAssetPost(slug: string): Promise<AssetPost | null> {
 // ─── Page blocks (for detail pages) ─────────────────────────────────────────
 
 export async function getPageBlocks(pageId: string) {
-  const response = await notion.blocks.children.list({ block_id: pageId, page_size: 100 })
-  return response.results
+  try {
+    const response = await notion.blocks.children.list({ block_id: pageId, page_size: 100 })
+    return response.results
+  } catch {
+    return []
+  }
 }
 
 // ─── Image sync ─────────────────────────────────────────────────────────────
