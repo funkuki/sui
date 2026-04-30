@@ -11,5 +11,11 @@
       "destination": "/sui",
       "permanent": false
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/sync-covers",
+      "schedule": "0 2 * * *"
+    }
   ]
 }

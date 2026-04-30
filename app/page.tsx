@@ -1,6 +1,7 @@
 import HeroBanner from '@/components/HeroBanner'
 import HeroIntro from '@/components/HeroIntro'
 import CTASection from '@/components/CTASection'
+import RevealSection from '@/components/RevealSection'
 import Card from '@/components/Card'
 import Link from 'next/link'
 import { getWorkPosts, getBlogPosts } from '@/lib/notion'
@@ -19,7 +20,7 @@ export default async function HomePage() {
 
       {/* Works strip */}
       {featuredWork.length > 0 && (
-        <section
+        <RevealSection
           style={{
             minHeight: 'calc(100vh - 92px)',
             padding: '120px 0',
@@ -69,12 +70,12 @@ export default async function HomePage() {
               <Card key={post.id} type="work" post={post} />
             ))}
           </div>
-        </section>
+        </RevealSection>
       )}
 
       {/* Blog strip */}
       {recentBlog.length > 0 && (
-        <section
+        <RevealSection
           style={{
             minHeight: 'calc(100vh - 92px)',
             padding: '120px 0',
@@ -122,10 +123,12 @@ export default async function HomePage() {
               <Card key={post.id} type="blog" post={post} />
             ))}
           </div>
-        </section>
+        </RevealSection>
       )}
 
-      <CTASection />
+      <RevealSection as="div">
+        <CTASection />
+      </RevealSection>
     </>
   )
 }

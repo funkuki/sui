@@ -5,6 +5,7 @@ import CTASection from '@/components/CTASection'
 import ExperienceCarousel from '@/components/ExperienceCarousel'
 import TestimonialsCarousel from '@/components/TestimonialsCarousel'
 import RadarChart from '@/components/RadarChart'
+import RevealSection from '@/components/RevealSection'
 import littleSui from '@/public/assets/little-sui.png'
 
 export const metadata: Metadata = {
@@ -151,7 +152,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── My Services ── */}
-      <section style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16">
+      <RevealSection
+        className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
+        style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
         <div style={{ width: '100%', maxWidth: 1352 }}>
           <h2 style={{
             fontFamily: 'Inter, sans-serif',
@@ -187,10 +191,13 @@ export default function AboutPage() {
           </div>
         </div>
         <div style={{ width: '70%', height: '1px', background: '#ede9e4', marginTop: 80 }} className="max-md:!mt-16" />
-      </section>
+      </RevealSection>
 
       {/* ── Experience ── */}
-      <section style={{ padding: '120px 0 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} className="max-md:!pt-16 max-md:!pb-16">
+      <RevealSection
+        className="max-md:!pt-16 max-md:!pb-16"
+        style={{ padding: '120px 0 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
         <div style={{ width: '100%' }}>
           <h2
             style={{
@@ -209,10 +216,13 @@ export default function AboutPage() {
           <ExperienceCarousel items={experience} />
         </div>
         <div style={{ width: '70%', height: '1px', background: '#ede9e4', marginTop: 80 }} className="max-md:!mt-16" />
-      </section>
+      </RevealSection>
 
       {/* ── Skills + Tools ── */}
-      <section style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16">
+      <RevealSection
+        className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
+        style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
         <div style={{ width: '100%', maxWidth: 1352 }}>
           <div
             style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start', position: 'relative' }}
@@ -252,56 +262,61 @@ export default function AboutPage() {
               }}>
                 Tools
               </h2>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 100px)',
-                gap: 16,
-              }}
-              className="max-md:!grid-cols-5"
-            >
-              {tools.map((t) => (
-                <div
-                  key={t.name}
-                  title={t.name}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 16,
-                    overflow: 'hidden',
-                    background: '#fff',
-                    border: '1px solid #e6e6e6',
-                    transition: 'transform 200ms cubic-bezier(.2,.8,.2,1), box-shadow 200ms',
-                  }}
-                  className="hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <Image
-                    src={t.src}
-                    alt={t.name}
-                    width={100}
-                    height={100}
-                    unoptimized
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                </div>
-              ))}
-            </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, 75px)',
+                  gap: 16,
+                }}
+                className="max-md:!grid-cols-5"
+              >
+                {tools.map((t) => (
+                  <div
+                    key={t.name}
+                    title={t.name}
+                    style={{
+                      width: 75,
+                      height: 75,
+                      borderRadius: 16,
+                      overflow: 'hidden',
+                      background: '#fff',
+                      border: '1px solid #e6e6e6',
+                      transition: 'transform 200ms cubic-bezier(.2,.8,.2,1), box-shadow 200ms',
+                    }}
+                    className="hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    <Image
+                      src={t.src}
+                      alt={t.name}
+                      width={75}
+                      height={75}
+                      unoptimized
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
         <div style={{ width: '70%', height: '1px', background: '#ede9e4', marginTop: 80 }} className="max-md:!mt-16" />
-      </section>
+      </RevealSection>
 
       {/* ── Testimonials ── */}
-      <section style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16">
+      <RevealSection
+        className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
+        style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
         <div style={{ width: '100%' }}>
           <TestimonialsCarousel testimonials={testimonials} />
         </div>
         <div style={{ width: '70%', height: '1px', background: '#ede9e4', marginTop: 80 }} className="max-md:!mt-16" />
-      </section>
+      </RevealSection>
 
       {/* ── CTA ── */}
-      <CTASection image="/assets/sui-clover.png" title={'Ready to\nwork with Sui?'} />
+      <RevealSection as="div">
+        <CTASection image="/assets/sui-clover.png" title={'Ready to\nwork with Sui?'} />
+      </RevealSection>
     </div>
   )
 }
