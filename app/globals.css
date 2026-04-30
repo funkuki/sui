@@ -123,3 +123,14 @@ textarea:focus {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
+/* 404 page — transparent footer fixed at bottom over hero image */
+body.page-404 footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent !important;
+  border-top: none !important;
+  z-index: 20;
+}
