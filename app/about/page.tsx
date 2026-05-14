@@ -98,7 +98,7 @@ export default function AboutPage() {
             alignItems: 'center',
             flex: 1,
           }}
-          className="max-md:!grid-cols-1 max-md:!px-5 max-md:!gap-10 max-md:!py-12"
+          className="max-lg:!grid-cols-1 max-lg:!px-10 max-lg:!gap-10 max-md:!px-5 max-md:!py-12"
         >
           {/* Character */}
           <div style={{ position: 'relative' }}>
@@ -124,7 +124,7 @@ export default function AboutPage() {
                 letterSpacing: '-0.02em',
                 color: '#0c0c0c',
               }}
-              className="max-md:!text-5xl"
+              className="max-lg:!text-6xl max-md:!text-5xl"
             >
               Hi, I am <em style={{ fontStyle: 'italic' }}>Sui</em>.
             </h1>
@@ -156,7 +156,7 @@ export default function AboutPage() {
 
       {/* ── My Services ── */}
       <RevealSection
-        className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
+        className="max-lg:!px-10 max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
         style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <div style={{ width: '100%', maxWidth: 1352 }}>
@@ -212,7 +212,7 @@ export default function AboutPage() {
               color: '#0c0c0c',
               letterSpacing: '-0.01em',
             }}
-            className="max-md:!px-5"
+            className="max-lg:!px-10 max-md:!px-5"
           >
             Experience
           </h2>
@@ -223,13 +223,13 @@ export default function AboutPage() {
 
       {/* ── Skills + Tools ── */}
       <RevealSection
-        className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
+        className="max-lg:!px-10 max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
         style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <div style={{ width: '100%', maxWidth: 1352 }}>
           <div
             style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start', position: 'relative' }}
-            className="max-md:!grid-cols-1 max-md:!gap-12"
+            className="max-lg:!gap-12 max-md:!grid-cols-1 max-md:!gap-12"
           >
             {/* Skills radar */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -307,7 +307,7 @@ export default function AboutPage() {
 
       {/* ── Testimonials ── */}
       <RevealSection
-        className="max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
+        className="max-lg:!px-10 max-md:!px-5 max-md:!pt-16 max-md:!pb-16"
         style={{ padding: '120px 80px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <div style={{ width: '100%' }}>

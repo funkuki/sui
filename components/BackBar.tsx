@@ -7,7 +7,7 @@ type BackBarProps = {
 
 export default function BackBar({ href, label }: BackBarProps) {
   return (
-    <div style={{ padding: '30px 80px 0' }} className="max-md:!px-5">
+    <div style={{ padding: '30px 80px 0' }} className="max-lg:!px-10 max-md:!px-5">
       <Link
         href={href}
         style={{

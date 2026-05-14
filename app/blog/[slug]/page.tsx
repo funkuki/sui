@@ -54,7 +54,7 @@ export default async function BlogDetailPage({ params }: Props) {
         <BackBar href="/blog" label="Blog" />
 
         {/* Hero image */}
-        <section style={{ padding: '30px 80px 0' }} className="max-md:!px-5">
+        <section style={{ padding: '30px 80px 0' }} className="max-lg:!px-10 max-md:!px-5">
           <div style={{
             width: '100%',
             maxWidth: 1100,
@@ -70,7 +70,7 @@ export default async function BlogDetailPage({ params }: Props) {
         </section>
 
         {/* Title */}
-        <section style={{ padding: '50px 80px 20px' }} className="max-md:!px-5 max-md:!py-8">
+        <section style={{ padding: '50px 80px 20px' }} className="max-lg:!px-10 max-md:!px-5 max-md:!py-8">
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             {post.tags.length > 0 && (
               <div style={{ display: 'flex', gap: 10, marginBottom: 22, flexWrap: 'wrap' }}>
@@ -97,19 +97,19 @@ export default async function BlogDetailPage({ params }: Props) {
               letterSpacing: '-0.01em',
               lineHeight: 1.15,
               color: '#0c0c0c',
-            }} className="max-md:!text-3xl">
+            }} className="max-lg:!text-4xl max-md:!text-3xl">
               {post.title}
             </h1>
           </div>
         </section>
 
         {/* Byline */}
-        <section style={{ padding: '10px 80px 20px' }} className="max-md:!px-5">
+        <section style={{ padding: '10px 80px 20px' }} className="max-lg:!px-10 max-md:!px-5">
           <Byline date={dateStr} />
         </section>
 
         {/* Body */}
-        <section style={{ padding: '20px 80px 60px' }} className="max-md:!px-5">
+        <section style={{ padding: '20px 80px 60px' }} className="max-lg:!px-10 max-md:!px-5">
           {post.summary && (
             <p style={{
               fontFamily: 'Inter, sans-serif',
@@ -127,20 +127,20 @@ export default async function BlogDetailPage({ params }: Props) {
         </section>
 
         {/* Share row */}
-        <section style={{ padding: '20px 80px 40px' }} className="max-md:!px-5">
+        <section style={{ padding: '20px 80px 40px' }} className="max-lg:!px-10 max-md:!px-5">
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
             <ShareButtons />
           </div>
         </section>
 
         {/* Author card */}
-        <section style={{ padding: '40px 80px 60px' }} className="max-md:!px-5">
+        <section style={{ padding: '40px 80px 60px' }} className="max-lg:!px-10 max-md:!px-5">
           <AuthorCard />
         </section>
 
         {/* Continue reading */}
         {continuePosts.length > 0 && (
-          <section style={{ padding: '20px 80px 100px' }} className="max-md:!px-5 max-md:!pb-16">
+          <section style={{ padding: '20px 80px 100px' }} className="max-lg:!px-10 max-md:!px-5 max-md:!pb-16">
             <div style={{ maxWidth: 1132, margin: '0 auto' }}>
               <h2 style={{
                 fontFamily: 'Inter, sans-serif',

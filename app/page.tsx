@@ -40,7 +40,7 @@ export default async function HomePage() {
               padding: '0 80px',
               marginBottom: 44,
             }}
-            className="max-md:!px-5"
+            className="max-lg:!px-10 max-md:!px-5"
           >
             <h2
               style={{
@@ -51,7 +51,7 @@ export default async function HomePage() {
                 letterSpacing: '-0.02em',
                 color: '#0c0c0c',
               }}
-              className="max-md:!text-4xl"
+              className="max-lg:!text-5xl max-md:!text-4xl"
             >
               My Works
             </h2>
@@ -64,7 +64,7 @@ export default async function HomePage() {
               gap: 32,
               padding: '0 80px',
             }}
-            className="max-md:!grid-cols-1 max-md:!px-5"
+            className="max-lg:!grid-cols-2 max-lg:!px-10 max-md:!grid-cols-1 max-md:!px-5"
           >
             {featuredWork.map((post) => (
               <Card key={post.id} type="work" post={post} />
@@ -93,7 +93,7 @@ export default async function HomePage() {
               padding: '0 80px',
               marginBottom: 44,
             }}
-            className="max-md:!px-5"
+            className="max-lg:!px-10 max-md:!px-5"
           >
             <h2
               style={{
@@ -104,7 +104,7 @@ export default async function HomePage() {
                 letterSpacing: '-0.02em',
                 color: '#0c0c0c',
               }}
-              className="max-md:!text-4xl"
+              className="max-lg:!text-5xl max-md:!text-4xl"
             >
               Blog
             </h2>
@@ -117,7 +117,7 @@ export default async function HomePage() {
               gap: 40,
               padding: '0 80px',
             }}
-            className="max-md:!grid-cols-1 max-md:!px-5"
+            className="max-lg:!px-10 max-md:!grid-cols-1 max-md:!px-5"
           >
             {recentBlog.map((post) => (
               <Card key={post.id} type="blog" post={post} />
@@ -150,7 +150,7 @@ function SeeMorePill({ href, children }: { href: string; children: React.ReactNo
         transition: 'transform 200ms cubic-bezier(.2,.8,.2,1), box-shadow 200ms',
         textDecoration: 'none',
       }}
-      className="hover:-translate-y-0.5 hover:shadow-lg"
+      className="hover:-translate-y-0.5 hover:shadow-lg max-md:!text-base max-md:!px-5 max-md:!py-3"
     >
       {children}
     </Link>

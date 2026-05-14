@@ -28,8 +28,8 @@
   object-position: center center;
 }
 
-/* Portrait mobile: shift video left so character centres in viewport */
-@media (max-width: 767px) and (orientation: portrait) {
+/* Portrait mobile/tablet: shift video so character stays in frame */
+@media (max-width: 1023px) and (orientation: portrait) {
   .hero-video {
     object-position: 70% center;
   }

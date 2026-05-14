@@ -54,7 +54,7 @@ export default function ExperienceCarousel({ items }: { items: ExperienceItem[] 
         userSelect: 'none',
         WebkitOverflowScrolling: 'touch',
       } as React.CSSProperties}
-      className="max-md:!px-5"
+      className="max-lg:!px-10 max-md:!px-5"
     >
       {items.map((item) => (
         <div

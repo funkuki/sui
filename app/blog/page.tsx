@@ -15,7 +15,7 @@ export default async function BlogPage() {
 
   return (
     <div className="animate-page-in">
-      <section style={{ padding: '80px 80px 30px' }} className="max-md:!px-5 max-md:!py-12">
+      <section style={{ padding: '80px 80px 30px' }} className="max-lg:!px-10 max-md:!px-5 max-md:!py-12">
         <h1
           style={{
             fontFamily: 'Inter, sans-serif',
@@ -25,7 +25,7 @@ export default async function BlogPage() {
             letterSpacing: '-0.02em',
             color: '#0c0c0c',
           }}
-          className="max-md:!text-5xl"
+          className="max-lg:!text-7xl max-md:!text-5xl"
         >
           Blog
         </h1>
@@ -43,7 +43,7 @@ export default async function BlogPage() {
         </p>
       </section>
 
-      <section style={{ padding: '0 80px 100px' }} className="max-md:!px-5 max-md:!pb-16">
+      <section style={{ padding: '0 80px 100px' }} className="max-lg:!px-10 max-md:!px-5 max-md:!pb-16">
         <PostGrid posts={posts} allTags={allTags} type="blog" />
       </section>
     </div>

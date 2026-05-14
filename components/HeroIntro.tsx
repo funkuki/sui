@@ -24,7 +24,7 @@ export default function HeroIntro() {
           gap: 80,
           alignItems: 'center',
         }}
-        className="max-md:!grid-cols-1 max-md:!px-5 max-md:!gap-10"
+        className="max-lg:!grid-cols-1 max-lg:!px-10 max-lg:!gap-10 max-md:!px-5"
       >
         {/* Avatar */}
         <div style={{ position: 'relative' }}>
@@ -80,7 +80,7 @@ export default function HeroIntro() {
               letterSpacing: '-0.02em',
               color: '#0c0c0c',
             }}
-            className="max-md:!text-5xl"
+            className="max-lg:!text-6xl max-md:!text-5xl"
           >
             Hi, I am <em style={{ fontStyle: 'italic', fontWeight: 800 }}>Sui</em>.
           </h1>
@@ -95,7 +95,7 @@ export default function HeroIntro() {
               marginBottom: 36,
               maxWidth: 620,
             }}
-            className="max-md:!text-base"
+            className="max-lg:!text-lg max-md:!text-base"
           >
             專攻品牌策略與體驗設計的數位產品設計師。遊走於科技、設計與行銷的交界，
             我熱衷於探索跨界的無限可能 — 將抽象的好點子，轉化為具體的品牌影響力。
@@ -152,7 +152,7 @@ function DarkPill({ href, children }: { href: string; children: React.ReactNode 
         transition: 'transform 200ms cubic-bezier(.2,.8,.2,1), box-shadow 200ms, background 200ms',
         textDecoration: 'none',
       }}
-      className="hover:-translate-y-0.5 hover:shadow-lg hover:!bg-black"
+      className="hover:-translate-y-0.5 hover:shadow-lg hover:!bg-black max-md:!text-base max-md:!px-5 max-md:!py-3"
     >
       {children}
     </Link>

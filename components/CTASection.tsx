@@ -26,7 +26,7 @@ export default function CTASection({
           alignItems: 'center',
           gap: 40,
         }}
-        className="max-md:!px-5 max-md:!py-16 max-md:!grid-cols-1"
+        className="max-lg:!px-10 max-md:!px-5 max-md:!py-16 max-md:!grid-cols-1"
       >
         {/* Text */}
         <div style={{ paddingLeft: 60 }} className="max-md:!pl-0">
@@ -41,7 +41,7 @@ export default function CTASection({
               letterSpacing: '-0.02em',
               color: '#0c0c0c',
             }}
-            className="max-md:!text-5xl"
+            className="max-lg:!text-6xl max-md:!text-5xl"
           >
             {title}
           </h2>

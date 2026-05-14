@@ -46,10 +46,10 @@ export default function ContactPage() {
 
   return (
     <div className="animate-page-in">
-      <section style={{ padding: '80px 80px 60px' }} className="max-md:!px-5 max-md:!py-12">
+      <section style={{ padding: '80px 80px 60px' }} className="max-lg:!px-10 max-md:!px-5 max-md:!py-12">
         <div
           style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'start' }}
-          className="max-md:!grid-cols-1"
+          className="max-lg:!gap-10 max-md:!grid-cols-1"
         >
           {/* Left: info */}
           <div>
@@ -63,7 +63,7 @@ export default function ContactPage() {
                 lineHeight: 1.05,
                 color: '#0c0c0c',
               }}
-              className="max-md:!text-5xl"
+              className="max-lg:!text-6xl max-md:!text-5xl"
             >
               Let&apos;s make<br />something good.
             </h1>

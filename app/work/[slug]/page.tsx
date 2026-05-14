@@ -49,7 +49,7 @@ export default async function WorkDetailPage({ params }: Props) {
       <BackBar href="/work" label="Work" />
 
       {/* Hero image */}
-      <section style={{ padding: '30px 80px 0' }} className="max-md:!px-5">
+      <section style={{ padding: '30px 80px 0' }} className="max-lg:!px-10 max-md:!px-5">
         <div style={{
           width: '100%',
           maxWidth: 1100,
@@ -65,7 +65,7 @@ export default async function WorkDetailPage({ params }: Props) {
       </section>
 
       {/* Title + tags */}
-      <section style={{ padding: '60px 80px 20px', textAlign: 'center' }} className="max-md:!px-5 max-md:!py-10">
+      <section style={{ padding: '60px 80px 20px', textAlign: 'center' }} className="max-lg:!px-10 max-md:!px-5 max-md:!py-10">
         <h1 style={{
           fontFamily: 'Inter, sans-serif',
           fontWeight: 800,
@@ -74,7 +74,7 @@ export default async function WorkDetailPage({ params }: Props) {
           letterSpacing: '-0.02em',
           color: '#0c0c0c',
           lineHeight: 1.1,
-        }} className="max-md:!text-4xl">
+        }} className="max-lg:!text-5xl max-md:!text-4xl">
           {post.title}
         </h1>
         {post.tags.length > 0 && (
@@ -97,7 +97,7 @@ export default async function WorkDetailPage({ params }: Props) {
       </section>
 
       {/* Project meta strip */}
-      <section style={{ padding: '20px 80px 40px' }} className="max-md:!px-5">
+      <section style={{ padding: '20px 80px 40px' }} className="max-lg:!px-10 max-md:!px-5">
         <div style={{
           maxWidth: 1100,
           margin: '0 auto',
@@ -135,7 +135,7 @@ export default async function WorkDetailPage({ params }: Props) {
 
       {/* Summary */}
       {post.summary && (
-        <section style={{ padding: '20px 80px 0' }} className="max-md:!px-5">
+        <section style={{ padding: '20px 80px 0' }} className="max-lg:!px-10 max-md:!px-5">
           <p style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: 20,
@@ -151,14 +151,14 @@ export default async function WorkDetailPage({ params }: Props) {
 
       {/* Notion content */}
       {blocks.length > 0 && (
-        <section style={{ padding: '20px 80px 60px' }} className="max-md:!px-5">
+        <section style={{ padding: '20px 80px 60px' }} className="max-lg:!px-10 max-md:!px-5">
           <NotionBlocks blocks={blocks as any} />
         </section>
       )}
 
       {/* Related work */}
       {relatedWork.length > 0 && (
-        <section style={{ padding: '60px 80px 80px' }} className="max-md:!px-5">
+        <section style={{ padding: '60px 80px 80px' }} className="max-lg:!px-10 max-md:!px-5">
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'Inter, sans-serif',
@@ -175,7 +175,7 @@ export default async function WorkDetailPage({ params }: Props) {
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
               gap: 24,
-            }} className="max-md:!grid-cols-1">
+            }} className="max-lg:!grid-cols-2 max-md:!grid-cols-1">
               {relatedWork.map((p) => (
                 <Card key={p.id} type="work" post={p} />
               ))}
