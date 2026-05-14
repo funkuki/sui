@@ -28,10 +28,10 @@
   object-position: center center;
 }
 
-/* Portrait mobile: girl is at ~57% horizontally, shift focus right */
+/* Portrait mobile: center the main character */
 @media (max-width: 767px) and (orientation: portrait) {
   .hero-video {
-    object-position: 57% center;
+    object-position: center center;
   }
 }
 

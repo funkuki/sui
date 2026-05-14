@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -19,9 +19,12 @@ type MobileMenuProps = {
 
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const pathname = usePathname()
-  const [mounted, setMounted] = useState(false)
+  const prevPathname = useRef(pathname)
 
+  // Only close when pathname actually changes (not on first mount)
   useEffect(() => {
+    if (prevPathname.current === pathname) return
+    prevPathname.current = pathname
     onClose()
   }, [pathname, onClose])
 
@@ -30,32 +33,19 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  useEffect(() => {
-    if (open) setMounted(true)
-  }, [open])
-
-  const handleTransitionEnd = () => {
-    if (!open) setMounted(false)
-  }
-
-  if (!mounted) return null
+  if (!open) return null
 
   return (
     <div
       className="fixed inset-0 z-50 flex flex-col"
-      style={{
-        background: 'rgba(0,0,0,0.8)',
-        opacity: open ? 1 : 0,
-        transition: 'opacity 250ms ease',
-      }}
-      onTransitionEnd={handleTransitionEnd}
+      style={{ background: 'rgba(0,0,0,0.8)' }}
     >
       {/* Close button */}
       <div className="flex justify-end px-5 py-5">
         <button
           onClick={onClose}
           aria-label="Close menu"
-          style={{ color: '#fff', lineHeight: 1, padding: 4, fontSize: 20 }}
+          style={{ color: '#fff', fontSize: 20, lineHeight: 1, padding: 4 }}
         >
           ✕
         </button>
@@ -74,9 +64,6 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
               fontWeight: 400,
               padding: '10px 0',
               textDecoration: 'none',
-              opacity: open ? 1 : 0,
-              transform: open ? 'translateY(0)' : 'translateY(10px)',
-              transition: 'opacity 300ms ease, transform 300ms ease',
             }}
           >
             {item.label}
