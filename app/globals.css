@@ -31,7 +31,7 @@
 /* Portrait mobile: shift video left so character centres in viewport */
 @media (max-width: 767px) and (orientation: portrait) {
   .hero-video {
-    object-position: 65% center;
+    object-position: 82% center;
   }
 }
 
