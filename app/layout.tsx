@@ -5,6 +5,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import { Agentation } from 'agentation'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="zh-TW" className={`${inter.variable} ${notoSansTC.variable}`}>
       <body className="font-sans" style={{ background: '#fdfcf9', color: '#0c0c0c' }}>
         <GoogleAnalytics />
+        {process.env.NODE_ENV === 'development' && <Agentation />}
         <Header />
         <main style={{ paddingTop: 'var(--header-h)' }}>{children}</main>
         <Footer />

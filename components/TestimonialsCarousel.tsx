@@ -1,10 +1,12 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 
 export type Testimonial = {
   category: string
   quote: string
+  logo: string
 }
 
 export default function TestimonialsCarousel({ testimonials }: { testimonials: Testimonial[] }) {
@@ -21,7 +23,7 @@ export default function TestimonialsCarousel({ testimonials }: { testimonials: T
         color: '#0c0c0c',
         letterSpacing: '-0.01em',
       }}>
-        How do my clients rate me
+        Kind Words from My Clients
       </h2>
 
       <div style={{ maxWidth: 680, margin: '0 auto', minHeight: 100 }}>
@@ -45,14 +47,26 @@ export default function TestimonialsCarousel({ testimonials }: { testimonials: T
         </p>
       </div>
 
-      {/* Avatar placeholder */}
+      {/* Client logo */}
       <div style={{
-        width: 48,
-        height: 48,
+        width: 64,
+        height: 64,
         borderRadius: '50%',
-        background: '#d5c9bc',
+        overflow: 'hidden',
         margin: '32px auto 20px',
-      }} />
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#f5f5f5',
+      }}>
+        <Image
+          src={t.logo}
+          alt="client logo"
+          width={64}
+          height={64}
+          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+        />
+      </div>
 
       {/* Dots */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>

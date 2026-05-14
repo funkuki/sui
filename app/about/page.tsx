@@ -56,15 +56,18 @@ const tools = [
 const testimonials = [
   {
     category: '在品牌分析與策略規劃上 給予 88% 的評價：',
-    quote: '「謝謝 Sui 對雙手牌的照顧，有你在的日子很令人心安😭♥️」',
+    quote: '「謝謝 Sui 對雙手牌的照顧，有你在的日子很令人心安😭♥」',
+    logo: '/assets/twohands_logo.jpg',
   },
   {
-    category: '在 UI/UX 設計執行上 給予 92% 的評價：',
-    quote: '「Sui 的設計思維非常清晰，從用戶角度出發，每個細節都讓人感到用心。」',
+    category: '在專案管理上 給予 95% 的評價：',
+    quote: '「在專案的過程中，我們深刻感受到 Sui 的專業與責任心🙏 真的很感謝。　而且 Sui 會用簡單易懂的方式解說一些專業知識，我覺得這是很難得的😊」',
+    logo: '/assets/AF_logo.jpg',
   },
   {
-    category: '在品牌視覺識別上 給予 95% 的評價：',
-    quote: '「合作過最有創意的設計師，能快速理解品牌需求並轉化為令人驚艷的視覺。」',
+    category: '在網站、UI/UX 和 IP 設計 給予 5/5 滿分 的評價：',
+    quote: '「實力超越單純的執行。」',
+    logo: '/assets/T_plus_logo.svg',
   },
 ]
 

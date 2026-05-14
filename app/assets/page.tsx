@@ -39,7 +39,7 @@ export default async function AssetsPage() {
           }}
           className="max-md:!text-base"
         >
-          設計師的工作包，邊做邊長 — Templates · Stickers · Workbooks · Kits.
+          Sui 的數位作品
         </p>
       </section>
 

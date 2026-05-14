@@ -39,7 +39,7 @@ export default async function WorkPage() {
           }}
           className="max-md:!text-base"
         >
-          A selection of brand, product and IP work — filter by what you&apos;re curious about.
+          Sui 的過往作品集
         </p>
       </section>
 

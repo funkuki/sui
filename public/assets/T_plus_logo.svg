@@ -1,0 +1,19 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <g id="background">
+    <rect x="0" y="0" width="512" height="512" rx="112" ry="112" fill="#0A0A0A"/>
+  </g>
+  <g id="mark" fill="#FAFAFA">
+    <!-- Horizontal crossbar: also the plus's horizontal stroke -->
+    <rect x="96" y="160" width="320" height="64"/>
+    <!-- T stem: moved from x=128 to x=192 (center at x=224) — more central, still clearly to the left of the plus stem -->
+    <rect x="192" y="224" width="64" height="192"/>
+    <!-- Plus stem above crossbar -->
+    <rect x="320" y="96" width="64" height="64"/>
+    <!-- Plus stem below crossbar -->
+    <rect x="320" y="224" width="64" height="64"/>
+  </g>
+  <g id="accent">
+    <!-- Amber tip on the plus's top — the "morning ritual" spark -->
+    <rect x="320" y="96" width="64" height="16" fill="#F59E0B"/>
+  </g>
+</svg>

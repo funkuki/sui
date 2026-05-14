@@ -84,6 +84,7 @@ export default function Header() {
             width={180}
             height={55}
             className="object-contain"
+            priority
           />
         </Link>
 
@@ -104,11 +105,11 @@ export default function Header() {
         <button
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
-          className="md:hidden flex flex-col gap-1.5 p-1"
+          className="md:hidden p-1"
         >
-          <span className="w-6 h-0.5 bg-fg block" />
-          <span className="w-6 h-0.5 bg-fg block" />
-          <span className="w-4 h-0.5 bg-fg block" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>
+          </svg>
         </button>
       </header>
 
