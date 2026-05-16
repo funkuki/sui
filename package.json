@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsx scripts/sync-notion-covers.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "sync:covers": "tsx scripts/sync-notion-covers.ts"
