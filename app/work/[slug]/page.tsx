@@ -32,7 +32,7 @@ export default async function WorkDetailPage({ params }: Props) {
   const [post, allWork] = await Promise.all([getWorkPost(slug), getWorkPosts()])
   if (!post) notFound()
 
-  const blocks = await getPageBlocks(post.id)
+  const blocks = await getPageBlocks(post.id, 'work')
   const relatedWork = allWork
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3)

@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import type { WorkPost, BlogPost, AssetPost } from '@/types'
-import { getPublicUrl } from './supabase'
+import { getPublicUrl, type Bucket } from './supabase'
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
@@ -198,10 +198,13 @@ export async function getAssetPost(slug: string): Promise<AssetPost | null> {
 
 // ─── Page blocks (for detail pages) ─────────────────────────────────────────
 
-export async function getPageBlocks(pageId: string) {
+export async function getPageBlocks(pageId: string, bucket?: Bucket) {
   try {
     const response = await notion.blocks.children.list({ block_id: pageId, page_size: 100 })
-    return response.results
+    const blocks = response.results
+    if (!bucket) return blocks
+    const { syncBlockImages } = await import('./notion-image-sync')
+    return syncBlockImages(blocks as any[], bucket)
   } catch {
     return []
   }

@@ -30,7 +30,7 @@ export default async function AssetDetailPage({ params }: Props) {
   const post = await getAssetPost(slug)
   if (!post) notFound()
 
-  const blocks = await getPageBlocks(post.id)
+  const blocks = await getPageBlocks(post.id, 'assets')
   const isFree = post.price === 0
   const tag = post.category
   const priceLabel = isFree ? '$0' : `NT$${post.price.toLocaleString()}`

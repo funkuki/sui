@@ -36,7 +36,7 @@ export default async function BlogDetailPage({ params }: Props) {
   ])
   if (!post) notFound()
 
-  const blocks = await getPageBlocks(post.id)
+  const blocks = await getPageBlocks(post.id, 'blog')
   const continuePosts = allPosts.filter((p) => p.slug !== slug).slice(0, 2)
 
   const dateStr = post.publishedAt

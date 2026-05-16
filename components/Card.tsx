@@ -35,16 +35,14 @@ function WorkCard({ post, href }: { post: WorkPost; href: string }) {
         className="group-hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] shadow-[0_1px_0_rgba(0,0,0,0.02)]"
       >
         {post.coverUrl ? (
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `url(${post.coverUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)',
-            }}
+          <Image
+            src={post.coverUrl}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)' }}
             className="group-hover:scale-[1.04]"
+            unoptimized
           />
         ) : (
           <div
@@ -148,16 +146,14 @@ function BlogCard({ post, href }: { post: BlogPost; href: string }) {
         className="group-hover:shadow-[0_22px_50px_rgba(0,0,0,0.15)] group-hover:-translate-y-1"
       >
         {post.coverUrl && (
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `url(${post.coverUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)',
-            }}
+          <Image
+            src={post.coverUrl}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)' }}
             className="group-hover:scale-[1.04]"
+            unoptimized
           />
         )}
       </div>
@@ -238,16 +234,14 @@ function AssetCard({ post, href }: { post: AssetPost; href: string }) {
         className="group-hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] shadow-[0_1px_0_rgba(0,0,0,0.02)]"
       >
         {post.coverUrl && (
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `url(${post.coverUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)',
-            }}
+          <Image
+            src={post.coverUrl}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            style={{ objectFit: 'cover', objectPosition: 'center', transition: 'transform 700ms cubic-bezier(.2,.8,.2,1)' }}
             className="group-hover:scale-[1.04]"
+            unoptimized
           />
         )}
         {tag && (
