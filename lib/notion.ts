@@ -201,7 +201,16 @@ export async function getAssetPost(slug: string): Promise<AssetPost | null> {
 export async function getPageBlocks(pageId: string, bucket?: Bucket) {
   try {
     const response = await notion.blocks.children.list({ block_id: pageId, page_size: 100 })
-    const blocks = response.results
+    let blocks = response.results as any[]
+
+    blocks = await Promise.all(blocks.map(async (block: any) => {
+      if (block.has_children && block.type === 'table') {
+        const childRes = await notion.blocks.children.list({ block_id: block.id, page_size: 100 })
+        return { ...block, table_rows: childRes.results }
+      }
+      return block
+    }))
+
     if (!bucket) return blocks
     const { syncBlockImages } = await import('./notion-image-sync')
     return syncBlockImages(blocks as any[], bucket)

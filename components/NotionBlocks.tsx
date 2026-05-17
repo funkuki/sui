@@ -4,18 +4,40 @@ import BookmarkCard from './BookmarkCard'
 
 type Props = { blocks: BlockObjectResponse[] }
 
+const NOTION_COLORS: Record<string, React.CSSProperties> = {
+  gray: { color: '#9B9A97' },
+  brown: { color: '#64473A' },
+  orange: { color: '#D9730D' },
+  yellow: { color: '#DFAB01' },
+  green: { color: '#0F7B6C' },
+  blue: { color: '#0B6E99' },
+  purple: { color: '#6940A5' },
+  pink: { color: '#AD1A72' },
+  red: { color: '#E03E3E' },
+  gray_background: { backgroundColor: '#EBECED' },
+  brown_background: { backgroundColor: '#E9E5E3' },
+  orange_background: { backgroundColor: '#FAEBDD' },
+  yellow_background: { backgroundColor: '#FBF3DB' },
+  green_background: { backgroundColor: '#DDEDEA' },
+  blue_background: { backgroundColor: '#DDEBF1' },
+  purple_background: { backgroundColor: '#EAE4F2' },
+  pink_background: { backgroundColor: '#F4DFEB' },
+  red_background: { backgroundColor: '#FBE4E4' },
+}
+
 function richText(rt: any[]): React.ReactNode {
   if (!Array.isArray(rt)) return null
   return rt.map((r: any, i: number) => {
     const text = r.plain_text ?? ''
-    const { bold, italic, code, strikethrough } = r.annotations ?? {}
+    const { bold, italic, code, strikethrough, color } = r.annotations ?? {}
     let node: React.ReactNode = text
     if (code) node = <code key={i} style={{ fontFamily: 'monospace', background: '#f1eeea', padding: '2px 6px', borderRadius: 4, fontSize: '0.9em' }}>{text}</code>
     if (bold) node = <strong key={i}>{node}</strong>
     if (italic) node = <em key={i}>{node}</em>
     if (strikethrough) node = <s key={i}>{node}</s>
     if (r.href) node = <a key={i} href={r.href} style={{ color: '#0c0c0c', borderBottom: '1px solid #2e2e2e' }} target="_blank" rel="noopener noreferrer">{node}</a>
-    return <span key={i}>{node}</span>
+    const colorStyle = color && color !== 'default' ? NOTION_COLORS[color] : undefined
+    return <span key={i} style={colorStyle}>{node}</span>
   })
 }
 
@@ -184,6 +206,51 @@ export default function NotionBlocks({ blocks }: Props) {
                 </code>
               </pre>
             )
+          case 'table': {
+            const hasColHeader = block.table?.has_column_header
+            const hasRowHeader = block.table?.has_row_header
+            const rows = (block.table_rows ?? []) as any[]
+            return (
+              <div key={block.id} style={{ margin: '32px 0', overflowX: 'auto' }}>
+                <table style={{
+                  width: '100%',
+                  borderCollapse: 'collapse',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 16,
+                  border: '1px solid #e6e6e6',
+                  borderRadius: 8,
+                  overflow: 'hidden',
+                }}>
+                  <tbody>
+                    {rows.map((row: any, ri: number) => {
+                      const isHeader = hasColHeader && ri === 0
+                      const cells: any[][] = row.table_row?.cells ?? []
+                      return (
+                        <tr key={row.id} style={{ borderBottom: ri < rows.length - 1 ? '1px solid #e6e6e6' : 'none', background: isHeader ? '#f9f8f7' : 'transparent' }}>
+                          {cells.map((cell: any[], ci: number) => {
+                            const isRowHead = hasRowHeader && ci === 0
+                            const Tag = isHeader || isRowHead ? 'th' : 'td'
+                            return (
+                              <Tag key={ci} style={{
+                                padding: '10px 16px',
+                                textAlign: 'left',
+                                fontWeight: isHeader || isRowHead ? 700 : 400,
+                                borderRight: ci < cells.length - 1 ? '1px solid #e6e6e6' : 'none',
+                                verticalAlign: 'top',
+                                whiteSpace: 'pre-wrap',
+                              }}>
+                                {richText(cell)}
+                              </Tag>
+                            )
+                          })}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )
+          }
           case 'bookmark':
             return (
               <div key={block.id} style={{ margin: '24px 0' }}>
